@@ -17,22 +17,24 @@
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    	destinationType: Camera.DestinationType.FILE_URI });
+		$("#make_photo").click(function(){
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+        	destinationType: Camera.DestinationType.FILE_URI });
 
-		function onSuccess(imageURI) {
-		    var image = document.getElementById('photo');
-		    image.src = imageURI;
-		}
+    		function onSuccess(imageURI) {
+    		    var image = document.getElementById('photo');
+    		    image.src = imageURI;
+    		}
 
-		function onFail(message) {
-		    alert('Failed because: ' + message);
-		}
+    		function onFail(message) {
+    		    alert('Failed because: ' + message);
+    		}
+        });
 
 	});
 	</script>
     
-    <title>Apka</title>
+    <title>Kamera</title>
 </head>
 
 <body>
@@ -41,7 +43,9 @@
     		<h1>Kamera</h1>
     	</div>
     	<div data-role="u1-content">
-            
+            <div id="buttons">
+                 <button class="button" id="make_photo">Zrób zdjęcie</button>
+           </div>
     		<img id="photo">
     	</div>
     </div>
