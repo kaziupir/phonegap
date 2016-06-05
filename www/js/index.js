@@ -26,5 +26,5 @@ var app = {
 };
 
 $('#cam').click(function(){
-    location.href="/cam.html";
+    location.href="cam.html";
 });
