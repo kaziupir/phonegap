@@ -9,27 +9,41 @@
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
 
+
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.min.css" />
 
+	<script type="text/javascript">
+	$(function(){
+		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    	destinationType: Camera.DestinationType.FILE_URI });
+
+		function onSuccess(imageURI) {
+		    var image = document.getElementById('photo');
+		    image.src = imageURI;
+		}
+
+		function onFail(message) {
+		    alert('Failed because: ' + message);
+		}
+
+	});
+	</script>
+    
     <title>Apka</title>
 </head>
 
 <body>
-    <div id="buttons">
-
-        <button class="button" id="cam">Kamera</button>
-        <button class="button" id="geo">Lokalizacja</button>
-        <button class="button" id="weather">Pogoda JSON</button>
-        <button class="button" id="db">Baza</button>
-
-
-
-
+    <div data-role="page">
+    	<div data-role="header">
+    		<h1>Kamera</h1>
+    	</div>
+    	<div data-role="u1-content">
+    		<img id="photo">
+    	</div>
     </div>
-    
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 
