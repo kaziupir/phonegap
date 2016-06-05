@@ -37,4 +37,6 @@ body {
 }
 
 
-
+.ui-title{
+    margin: 0 !important;
+}
