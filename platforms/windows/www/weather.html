@@ -17,32 +17,41 @@
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$("#make_photo").click(function(){
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-        	destinationType: Camera.DestinationType.FILE_URI });
+		$("#get_weather").click(function(){
+                var onSuccess = function(position) {
+                    $.ajax({
+                      method: "GET",
+                      url: "http://api.openweathermap.org/data/2.5/weather",
+                      data: { lat: position.coords.latitude.toFixed(3), lon: position.coords.longitude.toFixed(3)  , mode: "html", APPID: "087e6090743bf9b2f00587e520d45363"}
+                    })
+                      .done(function( text ) {
+                        
+                        var divs = $(text).find("div");
+                        $("#weather_info").html(divs);
+                        $("#weather_info div:nth-of-type(2)").css("float","");
+                        
+                    });
+                };
 
-    		function onSuccess(imageURI) {
-    		    var image = document.getElementById('photo');
-    		    image.src = imageURI;
-    		}
-
-    		function onFail(message) {
-    		    alert('Failed because: ' + message);
-    		}
+                 function onError(error) {
+                    alert('code: '    + error.code    + '\n' +
+                          'message: ' + error.message + '\n');
+                 }
+                  navigator.geolocation.getCurrentPosition(onSuccess, onError);
         });
 
 	});
 	</script>
     
-    <title>Kamera</title>
+    <title>Pogoda</title>
 </head>
 
 <body>
     <div data-role="page">
     	<div data-role="header">
-    		<h1><button id="make_photo">Zrób zdjęcie</button></h1>
+    		<h1><button id="get_weather">Sprawdź pogodę</button></h1>
     	</div>
-    		<img id="photo">
+    		<p id="weather_info"></p>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
