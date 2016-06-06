@@ -22,9 +22,9 @@
                     if(position.coords.latitude && position.coords.longitude){
                         $("#gps_info").html('Szerokość: ' + position.coords.latitude.toFixed(3)  + '<br>' +
                           'Długość: '   + position.coords.longitude.toFixed(3)  + '<br>' +
-                          'Wysokość: '   + position.coords.altitude.toFixed(3)   + '<br>' +
-                          'Dokładność: '     + position.coords.accuracy.toFixed(3)  + '<br>' +
-                          'Dokł. wysokości: ' + position.coords.altitudeAccuracy.toFixed(3) + '<br>');
+                          'Wysokość: '   + position.coords.altitude   + '<br>' +
+                          'Dokładność: '     + position.coords.accuracy  + '<br>' +
+                          'Dokł. wysokości: ' + position.coords.altitudeAccuracy + '<br>');
                      }
                      else  $("#gps_info").html("Brak sygnału");
                 };
@@ -33,10 +33,8 @@
                     alert('code: '    + error.code    + '\n' +
                           'message: ' + error.message + '\n');
                  }
-                  navigator.geolocation.getCurrentPosition(onSuccess, onError);
-
+                  navigator.geolocation.getCurrentPosition(onSuccess, onError,{ timeout: 30000 });
         });
-
 	});
 	</script>
     
