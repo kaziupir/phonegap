@@ -23,7 +23,7 @@
                         $("#gps_info").html('Szerokość: ' + position.coords.latitude.toFixed(3)  + '<br>' +
                           'Długość: '   + position.coords.longitude.toFixed(3)  + '<br>' +
                           'Wysokość: '   + position.coords.altitude   + '<br>' +
-                          'Dokładność: '     + position.coords.accuracy  + '<br>' +
+                          'Dokładność: '     + position.coords.accuracy.toFixed(1)  + 'm<br>' +
                           'Dokł. wysokości: ' + position.coords.altitudeAccuracy + '<br>');
                      }
                      else  $("#gps_info").html("Brak sygnału");
