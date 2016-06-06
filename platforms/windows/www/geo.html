@@ -19,12 +19,12 @@
 	$(document).ready(function(){
 		$("#get_gps").click(function(){
                 var onSuccess = function(position) {
-                    if(parseFloat(position.coords.latitude.toFixed(2)) >= parseFloat(position.coords.latitude.toFixed(2))){
-                        $("#gps_info").html('Szerokość: '          + position.coords.latitude.toFixed(3)          + '<br>' +
-                          'Długość: '         + position.coords.longitude.toFixed(3)           + '<br>' +
-                          'Wysokość: '          + position.coords.altitude.toFixed(3)            + '<br>' +
-                          'Dokładność: '          + position.coords.accuracy.toFixed(3)            + '<br>' +
-                          'Dokł. wysokości: ' + position.coords.altitudeAccuracy.toFixed(3)    + '<br>');
+                    if(position.coords.latitude && position.coords.longitude){
+                        $("#gps_info").html('Szerokość: ' + position.coords.latitude.toFixed(3)  + '<br>' +
+                          'Długość: '   + position.coords.longitude.toFixed(3)  + '<br>' +
+                          'Wysokość: '   + position.coords.altitude.toFixed(3)   + '<br>' +
+                          'Dokładność: '     + position.coords.accuracy.toFixed(3)  + '<br>' +
+                          'Dokł. wysokości: ' + position.coords.altitudeAccuracy.toFixed(3) + '<br>');
                      }
                      else  $("#gps_info").html("Brak sygnału");
                 };
