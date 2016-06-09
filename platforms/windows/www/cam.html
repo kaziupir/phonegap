@@ -16,22 +16,23 @@
     <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.min.css" />
 
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$("#make_photo").click(function(){
+	$(window).load(function(){
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-        	destinationType: Camera.DestinationType.FILE_URI });
-
-    		function onSuccess(imageURI) {
-    		    var image = document.getElementById('photo');
-    		    image.src = imageURI;
-    		}
-
-    		function onFail(message) {
-    		    alert('Failed because: ' + message);
-    		}
+            destinationType: Camera.DestinationType.FILE_URI });
+        $("#make_photo").click(function(){
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI });
         });
 
-	});
+            function onSuccess(imageURI) {
+                var image = document.getElementById('photo');
+                image.src = imageURI;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+    });
 	</script>
     
     <title>Kamera</title>

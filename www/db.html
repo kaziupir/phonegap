@@ -16,33 +16,78 @@
     <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.min.css" />
 
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$("#make_photo").click(function(){
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-        	destinationType: Camera.DestinationType.FILE_URI });
+	$(window).load(function(){
+            $.ajax({
+                type: "get",
+                url: "uzytkownicy.txt",
+                scriptCharset: "utf-8",
+                contentType: "application/json; charset=utf-8",
+                success: function(html) {
+                            var users = JSON.parse(html);
+                            var users_n  = users.uzytkownicy.length;
+                            var table = "<div data-role='main' class='ui-content'><table data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow' id='myTable'><thead><tr><th data-priority='2'>Id</th><th>Imię</th></tr></thead><tbody>";
+                            for(var i=0;i<users_n;i++){
+                                table+="<tr><td>" + users.uzytkownicy[i].id_ + "</td><td>" + users.uzytkownicy[i].imie + "</td></tr>";
+                            }
+                            table+= "</tbody></table>";
+                            $("#tabelka").html(table);
 
-    		function onSuccess(imageURI) {
-    		    var image = document.getElementById('photo');
-    		    image.src = imageURI;
-    		}
+                        }
+                });
 
-    		function onFail(message) {
-    		    alert('Failed because: ' + message);
-    		}
-        });
+        function get(){
+            $.ajax({
+                type: "get",
+                url: "uzytkownicy.txt",
+                scriptCharset: "utf-8",
+                contentType: "application/json; charset=utf-8",
+                success: function(html) {
+                            var users = JSON.parse(html);
+                            var users_n  = users.uzytkownicy.length;
+                            var table = "<div data-role='main' class='ui-content'><table data-role='table' data-mode='columntoggle' class='ui-responsive ui-shadow' id='myTable'><thead><tr><th data-priority='2'>Id</th><th>Imię</th></tr></thead><tbody>";
+                            for(var i=0;i<users_n;i++){
+                                table+="<tr><td>" + users.uzytkownicy[i].id_ + "</td><td>" + users.uzytkownicy[i].imie + "</td></tr>";
+                            }
+                            table+= "</tbody></table>";
+                            $("#tabelka").html(table);
 
-	});
+                        }
+                });
+        }
+
+            $("#add_user").click(function(){
+                $.ajax({
+                    type: "get",
+                    url: "uzytkownicy.txt",
+                    scriptCharset: "utf-8",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(html) {
+                                var users = JSON.parse(html);
+                                var users_n  = users.uzytkownicy.length;
+                                users.uzytkownicy.push({
+                                    id_: users_n+1,
+                                    imie: $("#imie").val()
+                                });
+                                alert(users.uzytkownicy[2].id_ + users.uzytkownicy[2].imie);
+                                
+                        }
+                });
+            });
+
+
+
+    });
 	</script>
     
-    <title>Kamera</title>
+    <title>Baza danych</title>
 </head>
 
 <body>
     <div data-role="page">
     	<div data-role="header">
-    		<h1><button id="make_photo">Zrób zdjęcie</button></h1>
+    		<h1 id="header"><input type="text" name="imie" id="imie"><button id="add_user">Dodaj</button></h1>
     	</div>
-    		<img id="photo">
+    		<div id="tabelka"></div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>

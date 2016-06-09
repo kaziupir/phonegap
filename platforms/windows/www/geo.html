@@ -16,8 +16,7 @@
     <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.min.css" />
 
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$("#get_gps").click(function(){
+  $(window).load(function(){
                 var onSuccess = function(position) {
                     if(position.coords.latitude && position.coords.longitude){
                         $("#gps_info").html('Szerokość: ' + position.coords.latitude.toFixed(3)  + '<br>' +
@@ -33,8 +32,11 @@
                     alert('code: '    + error.code    + '\n' +
                           'message: ' + error.message + '\n');
                  }
-                  navigator.geolocation.getCurrentPosition(onSuccess, onError,{ timeout: 30000 });
-        });
+                navigator.geolocation.getCurrentPosition(onSuccess, onError,{ timeout: 30000 });
+                
+    $("#get_gps").click(function(){
+        navigator.geolocation.getCurrentPosition(onSuccess, onError,{ timeout: 30000 });
+    });
 	});
 	</script>
     
